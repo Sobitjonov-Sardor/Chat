@@ -1,23 +1,13 @@
-let users = {};
-
-for (let i = 1; i < 11; i++) {
-    let name = prompt(`Введите имя пользователя ${i}`)
-    let age = +prompt(`Введите возраст пользователя ${i}`)
-
-    let user = {
-        id: i,
-        name: name,
-        age: age,
+let array = [];
+for (let i = 0; i < Infinity; i++) {
+    var command = prompt('Введите команду: add/delete/stop');
+    var commandArr = command.split(", ")
+    if (commandArr[0] == "add") {
+        array.push(commandArr[1])
+    } else if (commandArr[0] == "delete") {
+        console.clear(commandArr[1])
+    } else if ( commandArr[0] == "stop"){
+        break;
     }
-    users[i] = user;
-
-
-    console.log(`Пользователь: ${user.id}`);
-    console.log(`Имя: ${user.name}`);
-    console.log(`Возраст: ${user.age}`);
-
 }
-
-
-
-console.log(users);
+console.log(array);
