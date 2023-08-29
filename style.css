@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* .item {
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+    margin: 200px auto;
+
+} */
+
+body {
+    background: white;
+}
+.block {
+    width: 100px;
+    position: fixed;
+    padding: 20px;
+    border: 1px solid black;
+    top: 20px;
+    left: 20px;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.block__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    border: 1px solid black;
+}
