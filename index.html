@@ -1,107 +1,97 @@
-const hour = document.querySelector('.h'),
-    min = document.querySelector('.m'),
-    sec = document.querySelector('.s'),
-    minNumber = document.querySelector('.minutes'),
-    hourNumber = document.querySelector('.hours');
+<!DOCTYPE html>
+<html lang="en">
 
-function clock() {
-    const time = new Date();
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
 
-    const seconds = time.getSeconds() * 6;
-    const hours = time.getHours() * 30;
-    const minutes = time.getMinutes() * 6;
+<body>
+    <div class="tabsPanel">
+        <!-- Меню табов -->
+        <ul class="tabsLinks">
+            <li class="tabsItem active"><a href="#" class="tabsLink">Часы</a></li>
+            <li class="tabsItem">
+                <a href="#" class="tabsLink">Секундомер
+                    <!-- span для показа запуска секундомера
+                    Принимает на себя классы работы:
+                    active - Секундомер запущен
+                    active_clear - Секундомер остановлен но данные не сброшены
+                    -->
+                    <span class="tabsLink__span"></span>
+                </a>
+            </li>
+        </ul>
+        <!-- Все табы -->
+        <div class="tabsContent">
+            <!-- Стрелочные часы -->
+            <div class="clock tabsContentItem active">
+                <div class="arrowClock">
+                    <!-- Часы-->
+                    <div class="arrowClockNumber">
+                        <div class="arrowClockNumber__num arrowClockNumber__num_12">12</div>
+                        <div class="arrowClockNumber__arr arrowClockNumber__arr_1"></div>
+                        <div class="arrowClockNumber__arr arrowClockNumber__arr_2"></div>
+                        <div class="arrowClockNumber__num arrowClockNumber__num_3">3</div>
+                        <div class="arrowClockNumber__arr arrowClockNumber__arr_4"></div>
+                        <div class="arrowClockNumber__arr arrowClockNumber__arr_5"></div>
+                        <div class="arrowClockNumber__num arrowClockNumber__num_6">6</div>
+                        <div class="arrowClockNumber__arr arrowClockNumber__arr_7"></div>
+                        <div class="arrowClockNumber__arr arrowClockNumber__arr_8"></div>
+                        <div class="arrowClockNumber__num arrowClockNumber__num_9">9</div>
+                        <div class="arrowClockNumber__arr arrowClockNumber__arr_10"></div>
+                        <div class="arrowClockNumber__arr arrowClockNumber__arr_11"></div>
+                    </div>
 
-    sec.style = `transform: rotate(${seconds}deg); transition: 1s linear`;
-    hour.style = `transform: rotate(${hours}deg); transition: 1s linear`;
-    min.style = `transform: rotate(${minutes}deg); transition: 1s linear`;
+                    <!-- Стрелки  -->
 
-    minNumber.innerHTML = time.getMinutes() < 10 ? '0' + time.getMinutes() : time.getMinutes();
-    hourNumber.innerHTML = time.getHours() < 10 ? '0' + time.getHours() : time.getHours();
+                    <div class="s"></div> <!-- Секундная -->
+                    <div class="m"></div> <!-- Минутная -->
+                    <div class="h"></div> <!-- Часовая -->
+                </div>
+                <div class="numberClock">
+                    <!-- Вывод времени в цифрах -->
+                    <div class="hours">00</div>
+                    <div class="minutes">00</div>
+                </div>
+            </div>
+            <!-- Секундомер Д/З -->
+            <!-- 
 
-    setTimeout(() => clock(), 1000);
-}
+            Задание:
+                При помощи рекурсии и условий создать секундомер который будет работать без использования new Date()    
 
-clock();
+             -->
+            <div class="stopwatch tabsContentItem ">
+                <div class="stopwatch__clock">
 
-const links = document.querySelectorAll('.tabsItem'),
-    contents = document.querySelectorAll('.tabsContentItem');
+                    <div class="stopwatch__clock-description">
+                        <!-- Часы -->
+                        <div class="stopwatch__hours">0</div>
+                        Час.
+                    </div>
+                    <div class="stopwatch__clock-description">
+                        <!-- Минуты -->
+                        <div class="stopwatch__minutes">0</div>
+                        Мин.
+                    </div>
+                    <div class="stopwatch__clock-description">
+                        <!-- Секунды -->
+                        <div class="stopwatch__seconds">0</div>
+                        Сек.
+                    </div>
+                </div>
+                <!-- Кнопка запуска секундомера -->
+                <button class="stopwatch__btn">start</button>
 
-for (let i = 0; i < links.length; i++) {
-    links[i].addEventListener("click", function (e) {
-        // preventDefault() - метод для отключения функционала HTML
-        e.preventDefault();
+            </div>
+        </div>
+    </div>
 
-        for (let ix = 0; ix < links.length; ix++) {
-            links[ix].classList.remove('active');
-            contents[ix].classList.remove('active');
-        }
-        tabs(this, contents[i]);
-    })
-}
+    <script src="js/script.js"></script>
+</body>
 
-function tabs(link, content) {
-    link.classList.add('active');
-    content.classList.add('active');
-}
-
-//секундомер
-
-// const btn = document.querySelector('.stopwatch__btn'),
-//     secondWatch = document.querySelector('.stopwatch__seconds'),
-//     minuteWatch = document.querySelector('.stopwatch__minutes'),
-//     houreWatch = document.querySelector('.stopwatch__hours');
-
-// function counter() {
-//     secondWatch.innerHTML++
-//     if (secondWatch.innerHTML == 60) {
-//         minuteWatch.innerHTML++
-//         secondWatch.innerHTML = 0
-//     }
-//     setTimeout(() => counter(), 1000);
-// }
-
-// counter()
-
-const btn = document.querySelector('.stopwatch__btn'),
-    secondWatch = document.querySelector('.stopwatch__seconds'),
-    minuteWatch = document.querySelector('.stopwatch__minutes'),
-    hourWatch = document.querySelector('.stopwatch__hours');
-    
-btn.addEventListener("click", function () {
-    if (btn.innerHTML == 'start') {
-        btn.innerHTML = 'stop'
-        let i = 0;
-    } 
-     else if (btn.innerHTML == 'stop') {
-        btn.innerHTML = 'clear'
-    } else {
-        btn.innerHTML = 'start'
-        
-        secondWatch.innerHTML = 0
-        minuteWatch.innerHTML = 0
-        hourWatch.innerHTML = 0
-    }
-});
-
-function stopWatch(el, i) {
-    if (btn.innerHTML == 'stop') {
-        secondWatch.innerHTML++
-        if (secondWatch.innerHTML == 60) {
-            minuteWatch.innerHTML = +1
-            secondWatch.innerHTML = 0
-            
-            if (minuteWatch.innerHTML == 59) {
-                minuteWatch.innerHTML = +1
-                hourWatch++
-            } else {
-                
-            }
-        }
-    }
-     else {
-        
-    }
-    setTimeout(() => stopWatch(), 1000);
-}
-
-stopWatch()
+</html>
